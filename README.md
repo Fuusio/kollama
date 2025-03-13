@@ -15,6 +15,8 @@ A Kotlin client library for the [Ollama](https://ollama.ai) API. This SDK enable
 
 ## Installation
 
+> ⚠️ **Note:**  The Library is not yet available via Maven.  Version 0.2.0 will be.
+
 ### Gradle
 
 ```kotlin
