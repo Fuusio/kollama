@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.21"
-    kotlin("plugin.serialization") version "1.9.21"
+    kotlin("jvm") version "2.1.0"
+    kotlin("plugin.serialization") version "2.1.0"
     id("maven-publish")
 }
 
-group = "io.ollama.kotlin"
-version = "0.1.0"
+group = "org.fuusio.kollama"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -17,27 +17,27 @@ dependencies {
     // Kotlin standard library and coroutines
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    
+
     // Ktor client for HTTP requests
-    implementation("io.ktor:ktor-client-core:2.3.6")
-    implementation("io.ktor:ktor-client-cio:2.3.6")  // CIO engine
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
-    
+    implementation("io.ktor:ktor-client-core:3.1.1")
+    implementation("io.ktor:ktor-client-cio:3.1.1")  // CIO engine
+    implementation("io.ktor:ktor-client-content-negotiation:3.1.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.1.1")
+
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    
+
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    implementation("ch.qos.logback:logback-classic:1.4.11")
-    
+    implementation("ch.qos.logback:logback-classic:1.5.17")
+
     // Testing
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.21")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.21")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testImplementation("io.mockk:mockk:1.13.8")
-    testImplementation("io.ktor:ktor-client-mock:2.3.6")
+    testImplementation("io.ktor:ktor-client-mock:3.1.1")
 }
 
 tasks.test {
@@ -64,9 +64,9 @@ publishing {
             from(components["java"])
             
             pom {
-                name.set("Ollama Kotlin SDK")
+                name.set("kollama")
                 description.set("Kotlin client for Ollama API")
-                url.set("https://github.com/yourusername/ollama-kotlin")
+                url.set("https://github.com/Fuusio/kollama")
                 
                 licenses {
                     license {
@@ -77,9 +77,9 @@ publishing {
                 
                 developers {
                     developer {
-                        id.set("ollama")
-                        name.set("Ollama Contributors")
-                        email.set("info@ollama.ai")
+                        id.set("Fuusio")
+                        name.set("Fuusio")
+                        email.set("info@fuusio.org")
                     }
                 }
             }

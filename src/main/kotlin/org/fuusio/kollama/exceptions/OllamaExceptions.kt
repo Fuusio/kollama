@@ -1,4 +1,4 @@
-package io.ollama.kotlin.sdk.exceptions
+package org.fuusio.kollama.exceptions
 
 /**
  * Base exception class for all Ollama SDK exceptions.

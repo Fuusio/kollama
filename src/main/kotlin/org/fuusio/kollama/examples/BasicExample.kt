@@ -1,12 +1,10 @@
-package io.ollama.kotlin.sdk.examples
+package org.fuusio.kollama.examples
 
-import io.ollama.kotlin.sdk.Ollama
-import io.ollama.kotlin.sdk.model.ChatRequest
-import io.ollama.kotlin.sdk.model.GenerateRequest
-import io.ollama.kotlin.sdk.model.Message
+import org.fuusio.kollama.Kollama
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
+import org.fuusio.kollama.model.*
 
 /**
  * Basic examples demonstrating usage of the Ollama Kotlin SDK.
@@ -17,7 +15,7 @@ object BasicExample {
         try {
             // Example 1: List available models
             println("=== Available Models ===")
-            val models = Ollama.listModels()
+            val models = Kollama.listModels()
             models.models.forEach { model ->
                 println("${model.name} - ${model.size} bytes")
             }
@@ -30,7 +28,7 @@ object BasicExample {
             // Example 2: Chat completion
             println("=== Chat Completion ===")
             try {
-                val chatResponse = Ollama.chat(
+                val chatResponse = Kollama.chat(
                     ChatRequest(
                         model = modelName,
                         messages = listOf(
@@ -53,7 +51,7 @@ object BasicExample {
             println("=== Streaming Chat Completion ===")
             println("Response: ")
             try {
-                Ollama.chatStream(
+                Kollama.chatStream(
                     ChatRequest(
                         model = modelName,
                         messages = listOf(
@@ -75,7 +73,7 @@ object BasicExample {
             // Example 4: Generate text
             println("=== Generate Text ===")
             try {
-                val generateResponse = Ollama.generate(
+                val generateResponse = Kollama.generate(
                     GenerateRequest(
                         model = modelName,
                         prompt = "Describe a sunset in one sentence."
@@ -91,7 +89,7 @@ object BasicExample {
             println("=== Streaming Generate Text ===")
             println("Response: ")
             try {
-                Ollama.generateStream(
+                Kollama.generateStream(
                     GenerateRequest(
                         model = modelName,
                         prompt = "Count from 1 to 5.",
@@ -108,8 +106,8 @@ object BasicExample {
             // Example 6: Show model details
             try {
                 println("=== Model Details ===")
-                val modelDetails = Ollama.showModel(
-                    io.ollama.kotlin.sdk.model.ShowRequest(
+                val modelDetails = Kollama.showModel(
+                    _root_ide_package_.org.fuusio.kollama.model.ShowRequest(
                         model = modelName
                     )
                 )
@@ -123,8 +121,8 @@ object BasicExample {
             // Example 7: Create embeddings
             try {
                 println("\n=== Create Embeddings ===")
-                val embeddingResponse = Ollama.embedding(
-                    io.ollama.kotlin.sdk.model.EmbeddingRequest(
+                val embeddingResponse = Kollama.embedding(
+                    _root_ide_package_.org.fuusio.kollama.model.EmbeddingRequest(
                         model = modelName,
                         prompt = "Hello world!"
                     )
@@ -140,7 +138,7 @@ object BasicExample {
             e.printStackTrace()
         } finally {
             // Clean up
-            Ollama.close()
+            Kollama.close()
         }
     }
 } 

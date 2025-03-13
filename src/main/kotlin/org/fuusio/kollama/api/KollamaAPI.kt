@@ -1,12 +1,12 @@
-package io.ollama.kotlin.sdk.api
+package org.fuusio.kollama.api
 
-import io.ollama.kotlin.sdk.model.*
+import org.fuusio.kollama.model.*
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Interface defining all API operations for the Ollama service.
  */
-interface OllamaAPI {
+interface KollamaAPI {
     /**
      * Generates completions for the provided prompt using the specified model.
      *

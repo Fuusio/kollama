@@ -1,4 +1,4 @@
-package io.ollama.kotlin.sdk
+package org.fuusio.kollama
 
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -9,17 +9,16 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import io.ollama.kotlin.sdk.api.OllamaAPI
-import io.ollama.kotlin.sdk.exceptions.*
-import io.ollama.kotlin.sdk.model.*
-import io.ollama.kotlin.sdk.utils.*
-import io.ollama.kotlin.sdk.utils.CancellationException
+import io.ktor.utils.io.*
+import org.fuusio.kollama.api.KollamaAPI
+import org.fuusio.kollama.exceptions.*
+import org.fuusio.kollama.model.*
+import org.fuusio.kollama.utils.*
+import org.fuusio.kollama.utils.CancellationException
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.contextual
-import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonArray
@@ -32,7 +31,6 @@ import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonEncoder
 import mu.KotlinLogging
-import java.io.File
 
 private val logger = KotlinLogging.logger {}
 
@@ -92,15 +90,15 @@ object AnySerializer : KSerializer<Any> {
  * Main implementation of the Ollama API client.
  * Provides methods to interact with the Ollama API.
  */
-class OllamaClient(
-    config: OllamaConfig? = null
-) : OllamaAPI {
-    private val config: OllamaConfig = config ?: OllamaConfig(
+class KollamaClient(
+    config: KollamaConfig? = null
+) : KollamaAPI {
+    private val config: KollamaConfig = config ?: KollamaConfig(
         host = Constants.DEFAULT_HOST
     )
     private val client: HttpClient
     private val utils = object {
-        suspend fun encodeImage(image: Any): String = io.ollama.kotlin.sdk.utils.encodeImage(image)
+        suspend fun encodeImage(image: Any): String = org.fuusio.kollama.utils.encodeImage(image)
     }
 
     private val json: Json = Json {
@@ -126,9 +124,9 @@ class OllamaClient(
                 json(json)
             }
             install(HttpTimeout) {
-                requestTimeoutMillis = this@OllamaClient.config.timeoutMs
-                connectTimeoutMillis = this@OllamaClient.config.timeoutMs
-                socketTimeoutMillis = this@OllamaClient.config.timeoutMs
+                requestTimeoutMillis = this@KollamaClient.config.timeoutMs
+                connectTimeoutMillis = this@KollamaClient.config.timeoutMs
+                socketTimeoutMillis = this@KollamaClient.config.timeoutMs
             }
             install(HttpRequestRetry) {
                 retryOnExceptionOrServerErrors(maxRetries = 3)
@@ -140,7 +138,7 @@ class OllamaClient(
             defaultRequest {
                 contentType(ContentType.Application.Json)
                 accept(ContentType.Application.Json)
-                this@OllamaClient.config.headers.forEach { (key, value) ->
+                this@KollamaClient.config.headers.forEach { (key, value) ->
                     header(key, value)
                 }
                 headers {
@@ -189,8 +187,10 @@ class OllamaClient(
                 // Log request body based on type for better debugging
                 when (body) {
                     is ChatRequest -> logger.debug { "Request body for chat: ${json.encodeToString(ChatRequest.serializer(), body)}" }
-                    is GenerateRequest -> logger.debug { "Request body for generate: ${json.encodeToString(GenerateRequest.serializer(), body)}" }
-                    is EmbeddingRequest -> logger.debug { "Request body for embedding: ${json.encodeToString(EmbeddingRequest.serializer(), body)}" }
+                    is GenerateRequest -> logger.debug { "Request body for generate: ${json.encodeToString(
+                        GenerateRequest.serializer(), body)}" }
+                    is EmbeddingRequest -> logger.debug { "Request body for embedding: ${json.encodeToString(
+                        EmbeddingRequest.serializer(), body)}" }
                     is ShowRequest -> logger.debug { "Request body for show: ${json.encodeToString(ShowRequest.serializer(), body)}" }
                     is CreateRequest -> logger.debug { "Request body for create: ${json.encodeToString(CreateRequest.serializer(), body)}" }
                     is PullRequest -> logger.debug { "Request body for pull: ${json.encodeToString(PullRequest.serializer(), body)}" }
@@ -930,7 +930,7 @@ class OllamaClient(
          * Creates a new Ollama client with default configuration.
          */
         @JvmStatic
-        fun create(): OllamaClient = OllamaClient()
+        fun create(): KollamaClient = KollamaClient()
         
         /**
          * Creates a new Ollama client with the specified host.
@@ -938,8 +938,8 @@ class OllamaClient(
          * @param host The Ollama server host URL
          */
         @JvmStatic
-        fun create(host: String): OllamaClient = OllamaClient(
-            OllamaConfig(host = formatHost(host))
+        fun create(host: String): KollamaClient = KollamaClient(
+            KollamaConfig(host = formatHost(host))
         )
     }
 

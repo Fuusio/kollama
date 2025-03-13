@@ -1,4 +1,4 @@
-package io.ollama.kotlin.sdk
+package org.fuusio.kollama
 
 /**
  * Default constants for the Ollama SDK.

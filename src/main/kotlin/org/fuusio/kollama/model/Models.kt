@@ -1,15 +1,14 @@
-package io.ollama.kotlin.sdk.model
+package org.fuusio.kollama.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Required
-import java.util.Date
 
 /**
  * Configuration for the Ollama SDK client.
  */
-data class OllamaConfig(
+data class KollamaConfig(
     /**
      * Host URL for Ollama server.
      */
@@ -105,7 +104,7 @@ data class Message(
     @Required
     val content: String,
     val images: List<String>? = null,
-    @SerialName("tool_calls") val toolCalls: List<ToolCall>? = null
+    @SerialName("tool_calls") val toolCalls: List<_root_ide_package_.org.fuusio.kollama.model.ToolCall>? = null
 )
 
 /**
@@ -113,7 +112,7 @@ data class Message(
  */
 @Serializable
 data class ToolCall(
-    val function: ToolCallFunction
+    val function: _root_ide_package_.org.fuusio.kollama.model.ToolCallFunction
 )
 
 /**
@@ -131,7 +130,7 @@ data class ToolCallFunction(
 @Serializable
 data class Tool(
     val type: String,
-    val function: ToolFunction
+    val function: _root_ide_package_.org.fuusio.kollama.model.ToolFunction
 )
 
 /**
@@ -141,7 +140,7 @@ data class Tool(
 data class ToolFunction(
     val name: String,
     val description: String,
-    val parameters: ToolParameters
+    val parameters: _root_ide_package_.org.fuusio.kollama.model.ToolParameters
 )
 
 /**
@@ -151,7 +150,7 @@ data class ToolFunction(
 data class ToolParameters(
     val type: String,
     val required: List<String>,
-    val properties: Map<String, ToolProperty>
+    val properties: Map<String, _root_ide_package_.org.fuusio.kollama.model.ToolProperty>
 )
 
 /**
@@ -182,7 +181,7 @@ data class GenerateRequest(
     val format: String? = null,
     val images: List<String>? = null,
     @SerialName("keep_alive") val keepAlive: String? = null,
-    val options: Options? = null
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 )
 
 /**
@@ -193,12 +192,12 @@ data class ChatRequest(
     @Required
     val model: String,
     @Required
-    val messages: List<Message>? = null,
+    val messages: List<_root_ide_package_.org.fuusio.kollama.model.Message>? = null,
     val stream: Boolean? = null,
     val format: String? = null,
     @SerialName("keep_alive") val keepAlive: String? = null,
-    val tools: List<Tool>? = null,
-    val options: Options? = null
+    val tools: List<_root_ide_package_.org.fuusio.kollama.model.Tool>? = null,
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 ) {
     init {
         require(model.isNotBlank()) { "Model name cannot be blank" }
@@ -241,7 +240,7 @@ data class CreateRequest(
     val license: String? = null,
     val system: String? = null,
     val parameters: Map<String, @Contextual Any>? = null,
-    val messages: List<Message>? = null,
+    val messages: List<_root_ide_package_.org.fuusio.kollama.model.Message>? = null,
     val adapters: Map<String, String>? = null
 )
 
@@ -271,7 +270,7 @@ data class ShowRequest(
     val model: String,
     val system: String? = null,
     val template: String? = null,
-    val options: Options? = null
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 ) {
     init {
         require(model.isNotBlank()) { "Model name cannot be blank" }
@@ -287,7 +286,7 @@ data class EmbedRequest(
     val input: String,
     val truncate: Boolean? = null,
     @SerialName("keep_alive") val keepAlive: String? = null,
-    val options: Options? = null
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 )
 
 /**
@@ -298,7 +297,7 @@ data class EmbeddingsRequest(
     val model: String,
     val prompt: String,
     @SerialName("keep_alive") val keepAlive: String? = null,
-    val options: Options? = null
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 )
 
 /**
@@ -312,7 +311,7 @@ data class EmbeddingRequest(
     val input: String? = null,
     val truncate: Boolean? = null,
     @SerialName("keep_alive") val keepAlive: String? = null,
-    val options: Options? = null
+    val options: _root_ide_package_.org.fuusio.kollama.model.Options? = null
 ) {
     init {
         require(model.isNotBlank()) { "Model name cannot be blank" }
@@ -348,7 +347,7 @@ data class GenerateResponse(
 data class ChatResponse(
     val model: String,
     @SerialName("created_at") val createdAt: String,
-    val message: Message,
+    val message: _root_ide_package_.org.fuusio.kollama.model.Message,
     val done: Boolean,
     @SerialName("done_reason") val doneReason: String? = null,
     @SerialName("total_duration") val totalDuration: Long = 0,
@@ -412,7 +411,7 @@ data class ModelResponse(
     val model: String? = null,
     val size: Long,
     val digest: String,
-    val details: ModelDetails? = null,
+    val details: _root_ide_package_.org.fuusio.kollama.model.ModelDetails? = null,
     @SerialName("expires_at") val expiresAt: String? = null,
     @SerialName("size_vram") val sizeVram: Long? = null
 )
@@ -427,8 +426,8 @@ data class ShowResponse(
     val parameters: String? = null,
     val template: String? = null,
     val system: String? = null,
-    val details: ModelDetails? = null,
-    val messages: List<Message>? = null,
+    val details: _root_ide_package_.org.fuusio.kollama.model.ModelDetails? = null,
+    val messages: List<_root_ide_package_.org.fuusio.kollama.model.Message>? = null,
     @SerialName("modified_at") val modifiedAt: String? = null,
     @SerialName("model_info") val modelInfo: Map<String, @Contextual Any>? = null,
     @SerialName("projector_info") val projectorInfo: Map<String, @Contextual Any>? = null
@@ -439,7 +438,7 @@ data class ShowResponse(
  */
 @Serializable
 data class ListResponse(
-    val models: List<ModelResponse>
+    val models: List<_root_ide_package_.org.fuusio.kollama.model.ModelResponse>
 )
 
 /**

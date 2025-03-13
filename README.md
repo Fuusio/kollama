@@ -19,7 +19,7 @@ A Kotlin client library for the [Ollama](https://ollama.ai) API. This SDK enable
 
 ```kotlin
 dependencies {
-    implementation("io.ollama.kotlin:ollama-kotlin-sdk:0.1.0")
+    implementation("org.fuusio.kollama:kollama:0.1.1")
 }
 ```
 
@@ -36,9 +36,9 @@ dependencies {
 ## Quick Start
 
 ```kotlin
-import io.ollama.kotlin.sdk.Ollama
-import io.ollama.kotlin.sdk.model.ChatRequest
-import io.ollama.kotlin.sdk.model.Message
+import org.fuusio.kollama.Ollama
+import org.fuusio.kollama.model.ChatRequest
+import org.fuusio.kollama.model.Message
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking

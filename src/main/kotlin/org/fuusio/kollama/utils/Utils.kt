@@ -1,8 +1,8 @@
-package io.ollama.kotlin.sdk.utils
+package org.fuusio.kollama.utils
 
-import io.ollama.kotlin.sdk.Constants
-import io.ollama.kotlin.sdk.exceptions.OllamaResponseException
-import io.ollama.kotlin.sdk.model.ErrorResponse
+import org.fuusio.kollama.Constants
+import org.fuusio.kollama.exceptions.OllamaResponseException
+import org.fuusio.kollama.model.ErrorResponse
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -102,7 +102,7 @@ class CancellationException(message: String? = null, cause: Throwable? = null) :
  * @param errorResponse The error response body
  * @throws OllamaResponseException with details from the error response
  */
-fun handleErrorResponse(status: Int, errorResponse: ErrorResponse?) {
+fun handleErrorResponse(status: Int, errorResponse: _root_ide_package_.org.fuusio.kollama.model.ErrorResponse?) {
     val errorMessage = errorResponse?.error ?: "Unknown error occurred"
     throw OllamaResponseException(errorMessage, status)
 } 

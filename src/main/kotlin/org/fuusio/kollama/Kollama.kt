@@ -1,16 +1,16 @@
-package io.ollama.kotlin.sdk
+package org.fuusio.kollama
 
-import io.ollama.kotlin.sdk.api.OllamaAPI
-import io.ollama.kotlin.sdk.model.OllamaConfig
-import io.ollama.kotlin.sdk.utils.formatHost
+import org.fuusio.kollama.api.KollamaAPI
+import org.fuusio.kollama.model.KollamaConfig
+import org.fuusio.kollama.utils.formatHost
 
 /**
  * Main entry point for the Ollama Kotlin SDK.
  * Provides static access to the Ollama API and utility methods for creating client instances.
  */
-object Ollama : OllamaAPI by OllamaClient() {
+object Kollama : KollamaAPI by KollamaClient() {
     // Get the default client instance
-    private val defaultClient = OllamaClient()
+    private val defaultClient = KollamaClient()
     
     /**
      * Creates a new Ollama client with custom configuration.
@@ -19,7 +19,7 @@ object Ollama : OllamaAPI by OllamaClient() {
      * @return A new OllamaClient instance
      */
     @JvmStatic
-    fun createClient(config: OllamaConfig): OllamaClient = OllamaClient(config)
+    fun createClient(config: KollamaConfig): KollamaClient = KollamaClient(config)
     
     /**
      * Creates a new Ollama client with the specified host.
@@ -28,8 +28,8 @@ object Ollama : OllamaAPI by OllamaClient() {
      * @return A new OllamaClient instance
      */
     @JvmStatic
-    fun createClient(host: String): OllamaClient = OllamaClient(
-        OllamaConfig(host = formatHost(host))
+    fun createClient(host: String): KollamaClient = KollamaClient(
+        KollamaConfig(host = formatHost(host))
     )
     
     /**
@@ -40,8 +40,8 @@ object Ollama : OllamaAPI by OllamaClient() {
      * @return A new OllamaClient instance
      */
     @JvmStatic
-    fun createClient(host: String, headers: Map<String, String>): OllamaClient = OllamaClient(
-        OllamaConfig(
+    fun createClient(host: String, headers: Map<String, String>): KollamaClient = KollamaClient(
+        KollamaConfig(
             host = formatHost(host),
             headers = headers
         )
